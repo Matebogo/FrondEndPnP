@@ -1,0 +1,180 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+  crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <img class="d-block img-fluid" src="assets/pick_n_pay_logo_01.png">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item m-auto">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin-page">Back</a>
+        </li>
+
+      </ul>
+    </div>
+    <div><button>
+      <a (click)="logOut()">Log Out</a>
+  </button></div>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-secondary btn-number">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">BANKING DETAILS</h1>
+  </div>
+</section>
+<div class="container">
+    <form novalidate [formGroup]="form" class="form-horizontal" role="form">
+
+        <div class="form-group">
+          <label for="cardHolder">Card Holder:</label>
+          <input type="text" class="form-control" formControlName="cardHolder" 
+          [(ngModel)]="bankDetail.cardHolder">
+        </div>
+        <div *ngIf="form.get('cardHolder').invalid && form.get('cardHolder').touched"
+         class="alert alert-danger">
+          <div *ngIf="form.get('cardHolder').hasError('required')">
+              Card Holder is required!
+          </div>
+          <div *ngIf="form.get('cardHolder').hasError('pattern')">
+            Invalid Card Holder!.
+          </div>
+        </div>
+  
+        <div class="form-group">
+            <label>Card  Number:</label>
+            <input type="number"  formControlName="cardNumber" 
+            [(ngModel)]="bankDetail.cardNumber" 
+            class="form-control" maxlength="3">
+          </div>
+          <div *ngIf="form.get('cardNumber').invalid && form.get('cardNumber').touched" 
+          class="alert alert-danger">
+            <div *ngIf="form.get('cardNumber').hasError('required')">
+                card Number is required!
+            </div>
+            <div *ngIf="form.get('cardNumber').hasError('minlength')">
+              Invalid card Number!.
+            </div>
+          </div>
+
+  
+        <div class="form-group">
+          <label>Card CVC:</label>
+          <input type="password"  formControlName="cvc" 
+          [(ngModel)]="bankDetail.cvc" 
+          class="form-control" maxlength="3">
+        </div>
+        <div *ngIf="form.get('cvc').invalid && form.get('cvc').touched" 
+        class="alert alert-danger">
+          <div *ngIf="form.get('cvc').hasError('required')">
+              CVC is required!
+          </div>
+          <div *ngIf="form.get('cvc').hasError('minlength')">
+            Invalid CVC!.
+          </div>
+        </div>
+  
+        <button type="submit" (click)="saveBankingDetails()" name="button" class="btn btn-success btn-primary">Register</button>
+      </form>
+</div>
+<!-- Footer -->
+<footer class="text-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-lg-4 col-xl-3">
+        <h5>About</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <textarea rows="5" cols="30">
+                             <p class="col-lg -12">
+                                ONLINE SHOPPING TERMS
+                                These online shopping terms and conditions apply to all purchases ordered online at www.picknpay.co.za. Please read them carefully and print a copy for future reference. You are required to register with us before placing your first order online. Please click on Register to complete the registration form. Registration and/or use of our online shopping Website constitute your acceptance and agreement to be bound by the Terms of our Website, including the additional online shopping terms below.
+                                Online registration
+                                Registration on our online shopping site is conditional upon your specified delivery address being within certain specified areas. If your delivery address is not in an area where we deliver, your registration will not be completed. After you have registered, should you change your delivery address to an address which is not in an area where deliver your order will not be accepted. To register you will be required to provide certain information including personal details, payment card details and your delivery address. When registering you will be required to choose a UserID and a password. Please keep your password private. Pick n Pay accepts no liability for any damages suffered or losses incurred from the use or misuse of your password. You will be required to enter your user ID and password each time you visit our online shopping site. To amend any registration particulars please click on “My Profile” and edit your details.
+                                Product sales and availability
+                                All products displayed on our Website are subject to availability and will be delivered only within the Republic of South Africa. All prices shown on our Website are quoted in South African Rands and are valid and effective only in the Republic of South Africa. We reserve the right to discontinue or change the specifications of our products and services from time to time without notice. We will inform you as soon as possible if any products or services ordered by you are not available.
+                                Colours
+                                We have made every effort to display as accurately as possible the colours of the products that appear on our Website. However, as the actual colours you see will depend on the device that you use to access our Website, we cannot warrant that your device’s display of any colour will be accurate.
+                                Content errors
+                                We regret that no order will be accepted if we identify a material error in the description of any of our goods or services or their prices on our Website. Packaging may vary from that shown on our Website.
+                                No alcohol for sale to persons under 18 years
+                                Alcohol can only be purchased by customers who are 18 years or older.
+                                Pricing policy
+                                You will be charged the prices as they are reflected on the Products in store at the point of sale, subject to availability. Certain of the Products are variable/random mass items. Whilst the average mass of the Product is indicated on the Online Shopping Site as a guide to the cost, the actual Product delivered to you may weigh slightly more or less than the average mass indicated. You will be charged the actual amount due in respect of the specific Product delivered to you. Prices include Value-Added Tax. Special promotions may be subject to certain conditions, including stock availability and limited offer stipulations. A delivery fee will be charged for each order placed by you. Please visit our Website to view the delivery fee applicable.
+                                Methods of payment
+                                We will debit the total value of your online order against the payment card tendered by you during the check out process. Payment will be effected on acceptance of your order and prior to delivery. By submitting your order, identity number and payment card details you warrant that you are over the age of 18 (eighteen), are authorised to make payment with the payment card and that there are sufficient funds available to pay for the order.
+                                Stock availability
+                                Pick n Pay cannot always guarantee availability of stock and will endeavour to deliver a substitute line where possible. If we are unable to supply each and every item ordered or in the quantities ordered, you nevertheless agree to accept delivery and make payment for the items correctly delivered.
+                                Confirmation of orders
+                                Orders placed online constitute your offer to purchase subject to these Terms. Your offer is deemed to have been accepted by us when you receive our confirmation of your order. Failure by us to formally confirm or notify acceptance shall not affect the validity of the sale or the enforceability thereof.
+                                Delivery
+                                Pick n Pay delivery timeslots are as follows: Monday - Friday: 09:00-15:00; 15:00-17:00 and 17:00-19:00. Saturday: 09:00-15:00; 15:00-17:00. There are NO deliveries on Sundays and Public Holidays. Deliveries are effected on the day following the placement of your order on our site unless you have chosen to accept delivery at a later date. The sale and delivery of liquor is subject to national and regional statutory regulations. Accordingly we may not accept orders for delivery of liquor where this is prohibited. Delivery slots where delivery of liquor is prohibited are indicated as such on the checkout page. Alcohol purchases will require proof of age on delivery. Failure to supply such proof will render the sale null and void. We only deliver to registered customers within certain specified delivery areas. On delivery of the order to the specified delivery address, you will receive our delivery note showing the items delivered, any substitute items, any non-available items, the delivery fees, Value-Added Tax and the amount debited from your payment card. For verification purposes, the person accepting delivery at the delivery address may be required to produce a form of identification. Any person other than yourself who receives the products at the delivery address is presumed to be authorised to accept delivery on your behalf. Should no-one be in attendance at the time of delivery, the driver will keep the products and leave a notice at the delivery address to this effect. The driver will attempt to contact you to make new arrangements for delivery or collection. We reserve the right to charge an additional delivery fee should it be required in the circumstances. Our liability for failing to deliver the products timeously is limited to delivery being effected at a later agreed time at no additional charge. Please arrange that you or your authorised representative is available to accept your purchases at the delivery address and that appropriate access will be made available. On delivery, we will require you or your authorised representative to sign and print your or their name on a duplicate copy of the delivery note, to confirm receipt. We have outsourced all delivery and collection arrangements. Accordingly, we cannot, to the extent permitted by law, be liable for any damage suffered or loss incurred by reason of any acts or omissions of the deliverer, its directors, employees, sub-contractors, agents, representatives and/or affiliates.
+                                Refunds and returns policy
+                                If you are for any reason dissatisfied with an item purchased from our Website you may return it to any Pick n Pay store for a full refund, replacement or exchange. For hygiene reasons underwear (excluding bras) and earrings for pierced ears may not be returned or exchanged. Gift cards purchased will not be refunded. Please note that Country Road and Trenery purchases may only be returned to Pick n Pay stores that
+                                Cancellation
+                                If for any reason you would like to cancel an order this may be done by visiting your Order History on our Website or by contacting our Customer Services Centre on +27 (0)860 30 30 30. You will only be able to cancel orders up to midnight on the day prior to the date of delivery. We reserve the right to debit your payment card for the delivery fees in respect of any late cancellations. If you cancel your payment for any reason or if your payment card should cease to be valid for whatever reason, you will nevertheless be bound to pay to the full purchase price, including all costs incurred by us relating to the recovery thereof. Without prejudice to any other rights or remedies in law, we reserve the right to cancel forthwith any sale and/or your registration in the event of your breach any of the Terms.
+                                Risk and ownership
+                                Risk in the products shall pass to you or your authorized representative on delivery. We will retain ownership in the products until payment has been received in full.
+                        </p>
+                        </textarea>
+
+      </div>
+      <div>
+
+      </div>
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+        <h5>Others links</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="/category">Category</a>
+          </li>
+          <li>
+            <a routerLink="/product-list">Products</a>
+          </li>
+          <li>
+            <a routerLink="/cart">Shopping cart</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="col-md-4 col-lg-3 col-xl-3">
+        <h5>Contact</h5>
+        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+        <ul class="list-unstyled">
+          <li>
+            <i class="fa fa-home mr-2"></i>Pick n Pay</li>
+          <li>
+            <i class="fa fa-envelope mr-2"></i>CUSTOMER SUPPORT Submit your query</li>
+          <li>
+            <i class="fa fa-phone mr-2"></i>CUSTOMER CARELINE 0800 11 22 88 Mon-Sat: 08:00-19:00 Sun & public holidays: 09:00-17:00</li>
+
+          <li>
+            <i class="fa fa-phone mr-2"></i>CUSTOMER CARELINE 0800 11 22 88 Mon-Sat: 08:00-19:00 Sun & public holidays: 09:00-17:00</li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
