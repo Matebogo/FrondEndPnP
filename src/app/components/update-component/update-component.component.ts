@@ -24,7 +24,7 @@ export class UpdateComponentComponent implements OnInit {
 
   updateProductQuantity() {
 
-    this.updatedQuantity = this.updatedQuantity + this.product.quantity + this.product.badgeQuantity;
+    this.updatedQuantity = this.product.quantity * this.product.badgeQuantity;
 
     this.product.quantity = this.updatedQuantity;
 

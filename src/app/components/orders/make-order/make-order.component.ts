@@ -143,7 +143,7 @@ users: any;
     this.order.amount = this.getCartGrandTotal();
     this.order.dateCreated = new Date();
     this.order.userID = this.user.userID;
-    this.order.firstname = JSON.parse(localStorage.getItem('loggedInUser')).username;
+    //this.order.customerName = JSON.parse(localStorage.getItem('loggedInUser')).username;
 
     console.log(this.order);
 

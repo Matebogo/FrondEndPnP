@@ -48,7 +48,7 @@ export class SupplierComponent implements OnInit {
 
               for (let index = 0; index < this.products.length; index++) {
 
-                if (this.products[index].minimumQuantity >= this.products[index].quantity) {
+                if (this.products[index].totalQuantity <= this.products[index].quantity) {
 
                   console.log(false);
 

@@ -59,9 +59,9 @@ export class OrderService {
     .catch(this.errorHandler);
 
   }
-  getCustomerOrders(id: number) {
+  getCustomerOrders(username: string) {
 
-    return this.http.get(this.baseUrl + '/cusotmer-orders/' + id, { headers: this.headers })
+    return this.http.get(this.baseUrl + '/cusotmer-orders/' + username, { headers: this.headers })
     .map((response) => response)
     .catch(this.errorHandler);
 

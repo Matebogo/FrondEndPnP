@@ -20,7 +20,8 @@ export class ProductComponent implements OnInit {
     private supplier: Supplier;
   
     // tslint:disable-next-line:max-line-length
-    constructor(private _productService: ManageProductService,  private _router: Router, private _supplierService: SupplierService) { }
+    constructor(private _productService: ManageProductService,
+      private _router: Router, private _supplierService: SupplierService) { }
   
     ngOnInit() {
       this.product = new Product();

@@ -9,7 +9,7 @@ export class Order {
     dateCreated: Date;
     userID: number;
     driverID: number;
-    firstname: string;
+    customerName: string;
     houseNo: string ='';
     province: string='';
     address: string='';

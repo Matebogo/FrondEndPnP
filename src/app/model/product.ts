@@ -7,7 +7,7 @@ export class Product
       price?:number;
       quantity?: number;
       picture :String = '';
-      minimumQuantity?: number;
+      totalQuantity?: number;
       badgeQuantity?:number;
       supplier?: Supplier;
       purchased:false;

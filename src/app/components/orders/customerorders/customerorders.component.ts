@@ -32,7 +32,7 @@ export class CustomerordersComponent implements OnInit {
 
           this.user = userReturned;
 
-          this.orderService.getCustomerOrders(this.user.userID)
+          this.orderService.getCustomerOrders(this.user.username)
             .subscribe((orders) => {
 
               this.customerOrders = orders;

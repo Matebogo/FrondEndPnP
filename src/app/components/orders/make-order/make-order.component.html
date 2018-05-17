@@ -46,6 +46,13 @@
 </section>
 <div class="container">
   <form #orderForm="ngForm" role="form" class="form-horizontal">
+    <div class="form-group" [class.has-error]="customerNameControl.invalid && customerNameControl.touched" [class.has-success]="customerNameControl.valid">
+      <label for="customerName" class="control-label">Customer name</label>
+      <input id="customerName" type="text" required class="form-control" name="customerName" [(ngModel)]="order.customerName" #customerNameControl="ngModel">
+      <span class="help-block" *ngIf="customerNameControl.invalid && customerNameControl.touched">
+        Customer name is required!
+      </span>
+    </div>
 
       <div class="form-group" [class.has-error]="addressControl.invalid && addressControl.touched" [class.has-success]="addressControl.valid">
         <label for="address" class="control-label">Address</label>

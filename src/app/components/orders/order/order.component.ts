@@ -186,7 +186,7 @@ export class OrderComponent implements OnInit {
     this.order.dateCreated = new Date();
     this.order.orderNumber = this.user.userID;
     this.order.userID = this.user.userID;
-    this.order.firstname = this.user.firstname;
+    //this.order.customerName = this.user.firstname;
 
     console.log(this.order)
 
