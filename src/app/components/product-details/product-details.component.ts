@@ -49,8 +49,9 @@ export class ProductDetailsComponent implements OnInit {
   addToCart() {
 
     if (localStorage.getItem('loggedInUser') === null) {
-
-      this.router.navigate(['/login']);
+      let note = "Login to the account or Register to have the account";
+      alert(note);
+      this.router.navigate(['/home']);
 
     } else {
 

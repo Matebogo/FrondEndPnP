@@ -77,10 +77,10 @@ export class BankdetailsComponent implements OnInit {
       .subscribe((savedBankingDetails) => {
 
         console.log(savedBankingDetails);
-        let messageNotification = 'Thank you ' + this.loggedInCustomer+ ', Your Orders will be delivered within 2-3 days';
+        let messageNotification = 'Thank you ' + JSON.parse(localStorage.getItem("loggedInUser")).username+ ', Your Orders will be delivered within 2-3 days';
 
         alert(messageNotification);
-        this._router.navigate(['/home']);
+        this._router.navigate(['/customer-page']);
 
       }, (error) => {
 

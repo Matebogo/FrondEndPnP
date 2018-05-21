@@ -9,4 +9,5 @@ export class BankDetail{
     cvc: number;
     customer: Customer;
     userID: number;
+    totalAmount:number;
 }

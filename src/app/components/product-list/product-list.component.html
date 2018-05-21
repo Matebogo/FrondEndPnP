@@ -42,6 +42,7 @@
             <th>price</th>
             <th>Quantity</th>
             <th>Minimum Quantity</th>
+            <th>Badge Quantity</th>
             <th>picture</th>
             <th></th>
         </thead>
@@ -52,6 +53,7 @@
                 <td>{{product.price | currency:"R"}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.minimumQuantity}}</td>
+                <td>{{product.badgeQuantity}}</td>
                 <td>
                     <img [src]="product.picture" height="100px;" width="100px;">>
                 </td>

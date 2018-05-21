@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit {
         this._productService.addProduct(this.product)
           .subscribe((savedProduct) => {
             console.log(savedProduct);
-            this._router.navigate(['/home']);
+            this._router.navigate(['/admin-page']);
             let note = "Product Successfully Added";
             alert(note);
           }, (error) => {

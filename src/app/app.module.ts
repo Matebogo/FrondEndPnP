@@ -107,7 +107,7 @@ import {MatSnackBarModule} from '@angular/material';
       {path : 'product-list', component:ProductListComponent},
       {path : 'supplier-list', component:SupplierListComponent},
       {path : 'updateProduct', component:UpdateComponentComponent},
-      
+
       
       
       

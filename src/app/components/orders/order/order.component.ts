@@ -160,7 +160,7 @@ export class OrderComponent implements OnInit {
           console.log(this.cartItems.length);
           this.updatedQuantity = this.productsFromDatabase[index].quantity - this.cartItems[index].count;
 
-          this.productToBeUpdated.quantity = this.updatedQuantity;
+        this.productToBeUpdated.quantity = this.updatedQuantity;
           this.productToBeUpdated.picture = this.cartItems[index].product.picture;
           this.productToBeUpdated.productName = this.cartItems[index].product.productName;
           this.productToBeUpdated.productId = this.cartItems[index].product.productId;      
@@ -185,13 +185,13 @@ export class OrderComponent implements OnInit {
     this.order.amount = this.getCartGrandTotal();
     this.order.dateCreated = new Date();
     this.order.orderNumber = this.user.userID;
-    this.order.userID = this.user.userID;
+    this.order.userID =  JSON.parse(localStorage.getItem("loggedInUser")).id;;
     //this.order.customerName = this.user.firstname;
-
+    //this.subtractProductQuantity();
     console.log(this.order)
 
     this._router.navigate(['/bankdetails']);
-
+    this.subtractProductQuantity();
   }
 
   getCurrentDate(): Date {

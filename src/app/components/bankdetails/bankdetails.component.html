@@ -25,9 +25,11 @@
 
       </ul>
     </div>
-    <div><button>
-      <a (click)="logOut()">Log Out</a>
-  </button></div>
+    <div>
+      <button>
+        <a (click)="logOut()">Log Out</a>
+      </button>
+    </div>
     <div class="input-group input-group-sm">
       <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
       <div class="input-group-append">
@@ -45,58 +47,42 @@
   </div>
 </section>
 <div class="container">
-    <form novalidate [formGroup]="form" class="form-horizontal" role="form">
+<form #bankingDetailsForm="ngForm" role="form" class="form-horizontal">
+  <div class="form-group" [class.has-error]="cardHolderControl.invalid && cardHolderControl.touched" [class.has-success]="cardHolderControl.valid">
+    <label for="cardHolder" class="control-label">Card Holder </label>
+    <input id="cardHolder" type="text" required class="form-control" name="cardHolder" [(ngModel)]="order.cardHolder" #cardHolderControl="ngModel">
+    <span class="help-block" *ngIf="cardHolderControl.invalid && cardHolderControl.touched">
+      CArd Holder is required!
+    </span>
+  </div>
 
-        <div class="form-group">
-          <label for="cardHolder">Card Holder:</label>
-          <input type="text" class="form-control" formControlName="cardHolder" 
-          [(ngModel)]="bankDetail.cardHolder">
-        </div>
-        <div *ngIf="form.get('cardHolder').invalid && form.get('cardHolder').touched"
-         class="alert alert-danger">
-          <div *ngIf="form.get('cardHolder').hasError('required')">
-              Card Holder is required!
-          </div>
-          <div *ngIf="form.get('cardHolder').hasError('pattern')">
-            Invalid Card Holder!.
-          </div>
-        </div>
-  
-        <div class="form-group">
-            <label>Card  Number:</label>
-            <input type="number"  formControlName="cardNumber" 
-            [(ngModel)]="bankDetail.cardNumber" 
-            class="form-control" maxlength="3">
-          </div>
-          <div *ngIf="form.get('cardNumber').invalid && form.get('cardNumber').touched" 
-          class="alert alert-danger">
-            <div *ngIf="form.get('cardNumber').hasError('required')">
-                card Number is required!
-            </div>
-            <div *ngIf="form.get('cardNumber').hasError('minlength')">
-              Invalid card Number!.
-            </div>
-          </div>
+  <div class="form-group" [class.has-error]="cardNumberControl.invalid && cardNumberControl.touched" [class.has-success]="cardNumberControl.valid">
+    <label for="cardNumber" class="control-label">card Number</label>
+    <input id="cardNumber" type="text" required class="form-control" name="cardNumber" [(ngModel)]="order.cardNumber" #cardNumberControl="ngModel">
+    <span class="help-block" *ngIf="cardNumberControl.invalid && cardNumberControl.touched">
+      card Number is required!
+    </span>
+  </div>
 
-  
-        <div class="form-group">
-          <label>Card CVC:</label>
-          <input type="password"  formControlName="cvc" 
-          [(ngModel)]="bankDetail.cvc" 
-          class="form-control" maxlength="3">
-        </div>
-        <div *ngIf="form.get('cvc').invalid && form.get('cvc').touched" 
-        class="alert alert-danger">
-          <div *ngIf="form.get('cvc').hasError('required')">
-              CVC is required!
-          </div>
-          <div *ngIf="form.get('cvc').hasError('minlength')">
-            Invalid CVC!.
-          </div>
-        </div>
-  
-        <button type="submit" (click)="saveBankingDetails()" name="button" class="btn btn-success btn-primary">Register</button>
-      </form>
+  <div class="form-group" [class.has-error]="cvcControl.invalid && cvcControl.touched" [class.has-success]="cvcControl.valid">
+    <label for="cvc" class="control-label"> C V C</label>
+    <input id="cvc" type="text" required class="form-control" name="cvc" [(ngModel)]="order.cvc" #cvcControl="ngModel">
+    <span class="help-block" *ngIf="cvcControl.invalid && cvcControl.touched">
+      cvc is required!
+    </span>
+  </div>
+
+  <div class="form-group" [class.has-error]="totalAmountControl.invalid && totalAmountControl.touched" [class.has-success]="totalAmountControl.valid">
+    <label for="totalAmount" class="control-label">Total Amount</label>
+    <input id="totalAmount" type="text" required class="form-control" name="totalAmount" [(ngModel)]="order.totalAmount" #totalAmountControl="ngModel">
+    <span class="help-block" *ngIf="totalAmountControl.invalid && totalAmountControl.touched">
+     Total amount is required!
+    </span>
+  </div>
+
+
+  <button type="submit" (click)="saveBankingDetails()" name="button" class="btn btn-success btn-primary">Register</button>
+</form>
 </div>
 <!-- Footer -->
 <footer class="text-light">

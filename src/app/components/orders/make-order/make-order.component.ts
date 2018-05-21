@@ -8,6 +8,7 @@ import { Order } from '../../../model/order';
 import { ManageCustomerService } from '../../../services/manage-customer/manage-customer.service';
 import { ManageAccountService } from '../../../services/manageAccount/manage-account.service';
 import { User } from '../../../model/customer.model';
+import { ManageProductService } from '../../../services/manageProduct/manageProduct';
 
 @Component({
   selector: 'app-make-order',
@@ -26,17 +27,25 @@ export class MakeOrderComponent implements OnInit {
   cartGrandTotal: number;
   currentDate: Date;
   numberOrder: number;
-users: any;
+  users: any;
+  loggedInCustomer: string;
+  productsFromDatabase: Product[];
+  productToBeUpdated: Product;
+  updatedQuantity: number;
+
 
   // tslint:disable-next-line:max-line-length
-  constructor(private _orderService: OrderService,private account:ManageAccountService, private _router: Router, private _customerService: ManageCustomerService) { }
+  constructor(private _orderService: OrderService,
+    private account: ManageAccountService,
+    private _router: Router, private _productService: ManageProductService,
+    private _customerService: ManageCustomerService) { }
 
   ngOnInit() {
 
     this.user = new User();
     this.product = new Product();
     this.order = new Order();
-
+    this.productToBeUpdated = new Product();
     this.getLoggedInUser();
     this.getCartItems();
     this.getCartGrandTotal();
@@ -75,13 +84,13 @@ users: any;
 
     if (localStorage.getItem("loggedInUser") != null) {
 
-       this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')).username;
+      this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')).username;
 
-      
-     //this.loggedInUser = this.users;
-     console.log(this.loggedInUser);
 
-      this.account.getUserByUserName(this.loggedInUser)
+      //this.loggedInUser = this.users;
+      console.log(this.loggedInUser);
+
+      this.account.getUserByUserName(JSON.parse(localStorage.getItem('loggedInUser')).username)
         .subscribe((data) => {
 
           console.log(data);
@@ -136,20 +145,49 @@ users: any;
     return this.currentDate = new Date();
 
   }
+  subtractProductQuantity() {
 
+    if (this.cartItems.length !== 0) {
+
+      for (let index = 0; index < this.cartItems.length; index++) {
+
+        if (this.productsFromDatabase[index].productName === this.cartItems[index].product.productName) {
+
+          console.log(this.cartItems.length);
+          this.updatedQuantity = this.productsFromDatabase[index].quantity - this.cartItems[index].count;
+
+          this.productToBeUpdated.quantity = this.updatedQuantity;
+          this.productToBeUpdated.picture = this.cartItems[index].product.picture;
+          this.productToBeUpdated.productName = this.cartItems[index].product.productName;
+          this.productToBeUpdated.productId = this.cartItems[index].product.productId;
+          this.productToBeUpdated.price = this.cartItems[index].product.price;
+
+          this._productService.updateProduct(this.productToBeUpdated)
+            .subscribe((data) => {
+
+            }, (error) => {
+
+              console.log(error);
+
+            });
+        }
+      }
+
+    }
+  }
 
   createOrder() {
 
     this.order.amount = this.getCartGrandTotal();
     this.order.dateCreated = new Date();
-    this.order.userID = this.user.userID;
+    this.order.userID = JSON.parse(localStorage.getItem('loggedInUser')).id;
     //this.order.customerName = JSON.parse(localStorage.getItem('loggedInUser')).username;
 
     console.log(this.order);
 
     this._orderService.createOrder(this.order)
       .subscribe((orderDetails) => {
-        
+       // this.subtractProductQuantity();
         this._router.navigate(['/order'])
       }, (error) => {
         console.log(error);
@@ -160,20 +198,19 @@ users: any;
 
     if (localStorage.getItem('cartGrandTotal').startsWith('0')) {
 
-	  let note = "Your cart is empty!!";
-	  alert(note);
+      let note = "Your cart is empty!!";
+      alert(note);
 
-   	 } else {
+    } else {
 
       this._router.navigate(['/order']);
 
-    	}
     }
-    logOut()
-      {
-        localStorage.clear();
-        this._router.navigate(['/home']);
-        
-      }
+  }
+  logOut() {
+    localStorage.clear();
+    this._router.navigate(['/home']);
+
+  }
 
 }
