@@ -160,11 +160,14 @@ export class OrderComponent implements OnInit {
           console.log(this.cartItems.length);
           this.updatedQuantity = this.productsFromDatabase[index].quantity - this.cartItems[index].count;
 
-        this.productToBeUpdated.quantity = this.updatedQuantity;
-          this.productToBeUpdated.picture = this.cartItems[index].product.picture;
+          this.productToBeUpdated.quantity = this.updatedQuantity;
+          this.productToBeUpdated.price = this.cartItems[index].product.price;
           this.productToBeUpdated.productName = this.cartItems[index].product.productName;
           this.productToBeUpdated.productId = this.cartItems[index].product.productId;      
           this.productToBeUpdated.picture = this.cartItems[index].product.picture;
+          //this.productToBeUpdated.badgeQuantity = this.cartItems[index].product.badgeQuantity;
+          //this.productToBeUpdated.minimumQuantity = this.cartItems[index].product.minimumQuantity;      
+         // this.productToBeUpdated.supplier = this.cartItems[index].product.supplier;
 
           this._productService.updateProduct(this.productToBeUpdated)
             .subscribe((data) => {
@@ -187,11 +190,11 @@ export class OrderComponent implements OnInit {
     this.order.orderNumber = this.user.userID;
     this.order.userID =  JSON.parse(localStorage.getItem("loggedInUser")).id;;
     //this.order.customerName = this.user.firstname;
-    //this.subtractProductQuantity();
+   // this.subtractProductQuantity();
     console.log(this.order)
-
-    this._router.navigate(['/bankdetails']);
     this.subtractProductQuantity();
+    this._router.navigate(['/bankdetails']);
+   
   }
 
   getCurrentDate(): Date {

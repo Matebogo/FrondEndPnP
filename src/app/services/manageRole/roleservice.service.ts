@@ -43,7 +43,7 @@ export class RoleserviceService {
   getUsers(): Observable<any[]> {
     return this.http.get(this.Url + '/all', this.options)
     .map((response: Response) => response.json())
-      .catch(this.errorHandler);
+    .catch(this.errorHandler);
 
   }
   getUser(id: Number) {

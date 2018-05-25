@@ -145,36 +145,7 @@ export class MakeOrderComponent implements OnInit {
     return this.currentDate = new Date();
 
   }
-  subtractProductQuantity() {
 
-    if (this.cartItems.length !== 0) {
-
-      for (let index = 0; index < this.cartItems.length; index++) {
-
-        if (this.productsFromDatabase[index].productName === this.cartItems[index].product.productName) {
-
-          console.log(this.cartItems.length);
-          this.updatedQuantity = this.productsFromDatabase[index].quantity - this.cartItems[index].count;
-
-          this.productToBeUpdated.quantity = this.updatedQuantity;
-          this.productToBeUpdated.picture = this.cartItems[index].product.picture;
-          this.productToBeUpdated.productName = this.cartItems[index].product.productName;
-          this.productToBeUpdated.productId = this.cartItems[index].product.productId;
-          this.productToBeUpdated.price = this.cartItems[index].product.price;
-
-          this._productService.updateProduct(this.productToBeUpdated)
-            .subscribe((data) => {
-
-            }, (error) => {
-
-              console.log(error);
-
-            });
-        }
-      }
-
-    }
-  }
 
   createOrder() {
 
@@ -187,7 +158,7 @@ export class MakeOrderComponent implements OnInit {
 
     this._orderService.createOrder(this.order)
       .subscribe((orderDetails) => {
-       // this.subtractProductQuantity();
+     
         this._router.navigate(['/order'])
       }, (error) => {
         console.log(error);
